@@ -3,6 +3,8 @@ const app = express();
 const http = require("http").Server(app);
 const io = require("socket.io")(http);
 
+const ws_port = process.env.PORT || 3000;
+
 app.get("/", function (req, res) {
   res.sendFile("index.html", { root: __dirname + "/public" });
 });
@@ -45,6 +47,6 @@ io.on("connection", function (socket) {
   });
 });
 
-http.listen(3000, function () {
-  console.log("listening on http://localhost:3000/");
+http.listen(ws_port, function () {
+  console.log(`listening on http://localhost:${ws_port}/`);
 });

@@ -5,7 +5,7 @@ const state = {
   username: localStorage.getItem("username") || "Anonymous",
 };
 // ------ Socket.io ------
-var socket = io(":3000");
+var socket = io();
 socket.on("connect", function () {
   console.log("connected");
   setUsername(state.username);
@@ -107,6 +107,7 @@ document
     }
   });
 document.addEventListener("mousemove", function (event) {
+  if(!state.username) return;
   clientXInVw = (event.clientX / window.innerWidth) * 100;
   clientYInVh = (event.clientY / window.innerHeight) * 100;
   socket.emit("cursorPosition", { x: clientXInVw, y: clientYInVh });
