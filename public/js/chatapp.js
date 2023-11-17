@@ -5,7 +5,7 @@ const state = {
   username: localStorage.getItem("username") || "Anonymous",
 };
 // ------ Socket.io ------
-var socket = io("http://localhost:3000");
+var socket = io(":3000");
 socket.on("connect", function () {
   console.log("connected");
   setUsername(state.username);
