@@ -1,0 +1,6 @@
+.cursor{
+  position: absolute;
+}
+html{
+  cursor: url(../defaultCursor.cur) 0 0, auto;
+}
