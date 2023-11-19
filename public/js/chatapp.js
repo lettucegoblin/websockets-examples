@@ -115,9 +115,16 @@ document
       sendMessage();
     }
   });
+
+let lastCursorUpdate = Date.now();
+let delayForCursorUpdate = 120; // ms
 document.addEventListener("mousemove", function (event) {
   if(!state.username) return;
   clientXInVw = (event.clientX / window.innerWidth) * 100;
   clientYInVh = (event.clientY / window.innerHeight) * 100;
+  if (Date.now() - lastCursorUpdate < delayForCursorUpdate) {
+    return;
+  }
   socket.emit("cursorPosition", { x: clientXInVw, y: clientYInVh });
+  lastCursorUpdate = Date.now();
 });
