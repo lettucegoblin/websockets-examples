@@ -62,10 +62,28 @@ function sendMessage() {
   appendMessage(message, state.username, new Date().toISOString());
 }
 
+// welcome message
+appendMessage(`Welcome! This is a basic websocket chatroom where you can also see the cursors of other participants. Use \\username to set username. See https://github.com/lettucegoblin/websockets-examples for the code. Share this link ${window.location.href} with other participants.`, "Server", new Date().toISOString());
+
+function cleanMessage(message) {
+  return message.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+
+function addLinks(message) {
+  return message.replace(
+    /(https?:\/\/[^\s]+)/g,
+    '<a href="$1" target="_blank">$1</a>'
+  );
+}
+
 function appendMessage(message, username, timestamp) {
   var chatMessages = document.getElementById("chatMessages");
   var messageElement = document.createElement("div");
   messageElement.classList.add("message", "card", "mb-3");
+
+  message = cleanMessage(message); // prevent XSS
+  message = addLinks(message); // add links
+
   messageElement.innerHTML = `
     <div class="card-header"> 
       <span class="username" data-toggle="tooltip" title=${timestamp}>${username}</span>
