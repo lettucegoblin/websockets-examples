@@ -1,5 +1,12 @@
-.cursor{
+.cursor {
   position: absolute;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity 1s cubic-bezier(0.215, 0.610, 0.355, 1);
+}
+.cursor.fadeOut {
+  opacity: 0;
 }
 html{
   cursor: url(../defaultCursor.cur) 0 0, auto;

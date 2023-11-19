@@ -87,14 +87,23 @@ function setCursor(username, x, y) {
     cursor = document.createElement("img");
     cursor.id = username;
     cursor.classList.add("cursor");
+    cursor.classList.add("fadeOut");
     cursor.src = "/defaultCursor.cur";
-    
+    void cursor.offsetWidth;
     cursor.setAttribute("data-toggle", "tooltip");
     cursor.setAttribute("title", username);
     document.body.appendChild(cursor);
   }
+  cursor.classList.remove('fadeOut');
   cursor.style.left = x + "vw";
   cursor.style.top = y + "vh";
+  if(cursor.timeout) {
+    clearTimeout(cursor.timeout);
+  }
+  timeout = setTimeout(function() {
+    cursor.classList.add('fadeOut');
+  }, 100);
+  cursor.timeout = timeout;
 }
 
 // ------ Event Handlers ------
