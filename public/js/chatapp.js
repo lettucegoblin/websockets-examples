@@ -15,7 +15,7 @@ socket.on("chatMessage", function (data) {
   appendMessage(data.message, data.username, new Date().toISOString());
 });
 socket.on("cursorPosition", function (data) {
-  console.log("cursorPosition", data);
+  //console.log("cursorPosition", data);
   setCursor(data.username, data.x, data.y);
 });
 socket.on("disconnect", function () {
@@ -117,7 +117,7 @@ document
   });
 
 let lastCursorUpdate = Date.now();
-let delayForCursorUpdate = 120; // ms
+let delayForCursorUpdate = 60; // ms
 document.addEventListener("mousemove", function (event) {
   if(!state.username) return;
   clientXInVw = (event.clientX / window.innerWidth) * 100;

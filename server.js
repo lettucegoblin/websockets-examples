@@ -33,7 +33,7 @@ io.on("connection", function (socket) {
   });
 
   socket.on("cursorPosition", function (data) {
-    console.log("setCursor", data);
+    //console.log("setCursor", data);
     // broadcast to all except sender
     socket.broadcast.emit("cursorPosition", {
       username: socket.username,
